@@ -1,10 +1,12 @@
 import React from 'react';
 
-const Modal = ({ id, title, name, setName, description, setDescription, price, setPrice }) => {
+const Modal = ({ id, title, name, setName, description, setDescription, price, setPrice, validateData }) => {
 
   const handleNameChange = (e) => setName(e.target.value);
   const handleDescriptionChange = (e) => setDescription(e.target.value);
   const handlePriceChange = (e) => setPrice(e.target.value);
+
+  const hanldeSubmit = () => validateData();
 
   return (
 
@@ -37,12 +39,12 @@ const Modal = ({ id, title, name, setName, description, setDescription, price, s
             </div>
             
             <div className="d-grid col-6 mx-auto">
-              <button className="btn btn-success">Guardar</button>
+              <button className="btn btn-success" onClick={hanldeSubmit}>Guardar</button>
             </div>
           </div>
 
           <div className="modal-footer">
-            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" id="btnClose" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
           </div>
           
         </div>

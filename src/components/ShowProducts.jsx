@@ -5,6 +5,7 @@ import withReactContent from 'sweetalert2-react-content';
 import AddBtn from './AddBtn.jsx';
 import Table from './Table.jsx';
 import Modal from './Modal.jsx';
+import { showAlert } from '../utils/functions.js';
 
 const ShowProducts = () => {
 
@@ -42,6 +43,79 @@ const ShowProducts = () => {
     window.setTimeout(() => document.getElementById('name').focus(), 500);
   };
 
+  const validateData = () => {
+
+    let params;
+    let method;
+
+    if(name.trim() === '') {
+
+      showAlert('Escribe el nombre del producto', 'warning');
+
+    } else if(description.trim() === '') {
+
+      showAlert('Escribe la descripción del producto', 'warning');
+
+    } else if(price.trim() === '') {
+
+      showAlert('Escribe el precio del producto', 'warning');
+
+    } else {
+
+      if(operation === 1) {
+
+        params = { 
+          name: name.trim(),
+          description: description.trim(),
+          price: price
+        },
+        method = 'POST'
+
+      } else if (operation === 2) {
+
+        params = { 
+          id: id,
+          name: name.trim(),
+          description: description.trim(),
+          price: price.trim()
+        },
+        method = 'PATCH'
+      }
+
+      SendData(method, params);
+    }
+  };
+
+  const SendData = async (method, params) => {
+
+    console.log({ method, params })
+    await fetch(URL_API, { 
+      method: method, 
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(params) 
+    })
+      .then((res) => {
+
+        console.log(res)
+
+        // let type = res.data[0];
+        // let message = res.data[1];
+        
+
+        // showAlert(message, type);
+
+        // if(type === 'success') {
+        //   document.getElementById('btnClose').click();
+        //   getProducts();
+        }
+      })
+      .catch((error) => {
+
+        showAlert('ERROR EN LA SOLICITUD', 'error');
+        console.log(error);
+      });
+  }
+
   const getProducts = async () => {
     
     const res = await fetch(URL_API);
@@ -71,7 +145,7 @@ const ShowProducts = () => {
         </div>
       </div>
 
-      <Modal id={id} title={title} name={name} setName={setName} description={description} setDescription={setDescription} price={price} setPrice={setPrice}/>
+      <Modal id={id} title={title} name={name} setName={setName} description={description} setDescription={setDescription} price={price} setPrice={setPrice} validateData={validateData}/>
 
     </section>
 
