@@ -3,7 +3,7 @@ import TableRow from './TableRow.jsx';
 
 const TITLES = ['#', 'PRODUCTO', 'DESCRIPCIÓN', 'PRECIO', '']
 
-const Table = ({ products }) => {
+const Table = ({ products, openModal }) => {
 
   return (
 
@@ -19,7 +19,7 @@ const Table = ({ products }) => {
 
           <tbody className="table-group-divider">
             {
-              products.map((product, i) => <TableRow key={product.id} product={product} i={i}/>)
+              products.map((product, i) => <TableRow product={product} key={product.id} i={i} openModal={openModal}/>)
             }
           </tbody>
         </table>

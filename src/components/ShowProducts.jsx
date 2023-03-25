@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { showAlert } from './../utils/functions.js';
+// import { showAlert } from './../utils/functions.js';
 import AddBtn from './AddBtn.jsx';
 import Table from './Table.jsx';
 import Modal from './Modal.jsx';
@@ -18,11 +18,35 @@ const ShowProducts = () => {
   const [operation, setOperation] = useState(1);
   const [title, setTitle] = useState('');
 
+  const openModal = (op, id, name, description, price) => {
+
+    setId('');
+    setName('');
+    setDescription('');
+    setPrice('');
+    setOperation(op);
+
+    if (op === 1) {
+
+      setTitle('Registrar Producto');
+
+    } if (op === 2) {
+
+      setTitle('Editar Producto');
+      setId(id);
+      setName(name);
+      setDescription(description);
+      setPrice(price);
+    }
+
+    window.setTimeout(() => document.getElementById('name').focus(), 500);
+  };
+
   const getProducts = async () => {
     
     const res = await fetch(URL_API);
     return await res.json();    
-  }
+  };
 
   useEffect(() => {
 
@@ -39,11 +63,11 @@ const ShowProducts = () => {
 
       <div className="container">
         <div className="row my-4">
-          <AddBtn/>
+          <AddBtn openModal={openModal}/>
         </div>
 
         <div className="row mt-3">
-          <Table products={products}/>
+          <Table products={products} openModal={openModal}/>
         </div>
       </div>
 

@@ -22,13 +22,13 @@ const Modal = ({ id, title, name, setName, description, setDescription, price, s
             <input type="hidden" id={id}/>
 
             <div className="input-group mb-3">
-              <label htmlFor="nombre" className="input-group-text">Nombre</label>
-              <input type="text" id="nombre" className="form-control" value={name} onChange={handleNameChange}/>
+              <label htmlFor="name" className="input-group-text">Nombre</label>
+              <input type="text" id="name" className="form-control" value={name} onChange={handleNameChange}/>
             </div>
 
             <div className="input-group mb-3">
               <label htmlFor="description" className="input-group-text">Descripción</label>
-              <textarea type="text" id="description" className="form-control" value={description} onChange={handleDescriptionChange}/>
+              <input type="text" id="description" className="form-control" value={description} onChange={handleDescriptionChange}/>
             </div>
 
             <div className="input-group mb-3">
