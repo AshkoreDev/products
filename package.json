@@ -1,0 +1,28 @@
+{
+  "name": "products",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "bootstrap": "^5.2.3",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "sweetalert2": "^11.7.3",
+    "sweetalert2-react-content": "^5.0.7"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@vitejs/plugin-react": "^1.3.0",
+    "vite": "^2.9.15"
+  },
+  "main": "vite.config.js",
+  "keywords": [],
+  "author": "Aracely Alba",
+  "license": "MIT",
+  "description": ""
+}
