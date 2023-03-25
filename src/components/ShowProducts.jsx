@@ -62,34 +62,25 @@ const ShowProducts = () => {
 
     } else {
 
-      if(operation === 1) {
+      params = { 
+        name: name.trim(),
+        description: description.trim(),
+        price: price
+      };
 
-        params = { 
-          name: name.trim(),
-          description: description.trim(),
-          price: price
-        },
-        method = 'POST'
+      (operation === 1) ? method = 'POST' :  method = 'PATCH';
 
-      } else if (operation === 2) {
-
-        params = { 
-          id: id,
-          name: name.trim(),
-          description: description.trim(),
-          price: price.trim()
-        },
-        method = 'PATCH'
-      }
-
-      SendData(method, params);
+      SendData(method, params, id);
     }
   };
 
-  const SendData = async (method, params) => {
+  const SendData = async (method, params, id) => {
 
-    console.log({ method, params })
-    await fetch(URL_API, { 
+    let URL;
+
+    (method === 'PATCH') ? URL = URL_API+id : URL = URL_API;
+
+    await fetch(URL, { 
       method: method, 
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(params) 
@@ -98,16 +89,18 @@ const ShowProducts = () => {
 
         console.log(res)
 
-        // let type = res.data[0];
+        let type = res.status;
         // let message = res.data[1];
-        
+
+        console.log(type);
 
         // showAlert(message, type);
+        showAlert(type, 'warning');
 
         // if(type === 'success') {
         //   document.getElementById('btnClose').click();
         //   getProducts();
-        }
+        //}
       })
       .catch((error) => {
 
