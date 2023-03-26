@@ -80,30 +80,26 @@ const ShowProducts = () => {
 
     (method === 'PATCH') ? URL = URL_API+id : URL = URL_API;
 
-    await fetch(URL, { 
+    const resp = await fetch(URL, { 
       method: method, 
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(params) 
     })
-      .then((res) => {
-
-        console.log(res)
-
-        let type = res.status;
-        // let message = res.data[1];
-
-        console.log(type);
-
-        // showAlert(message, type);
-        showAlert(type, 'warning');
-
-        // if(type === 'success') {
-        //   document.getElementById('btnClose').click();
-        //   getProducts();
-        //}
+    .then((res) => res.json())
+    .then((data) => {
+      
+        let type = data.success;
+        let message = data.message;
+       
+        showAlert(message, type);
+      
+        if(type === 'success') {
+          document.getElementById('btnClose').click();
+          getProducts();
+        }
       })
       .catch((error) => {
-
+      
         showAlert('ERROR EN LA SOLICITUD', 'error');
         console.log(error);
       });
@@ -112,16 +108,14 @@ const ShowProducts = () => {
   const getProducts = async () => {
     
     const res = await fetch(URL_API);
-    return await res.json();    
+    const {data} = await res.json();  
+
+    setProducts(data);    
   };
 
   useEffect(() => {
 
-    return async () => {
-
-      const { data } = await getProducts();
-      setProducts(data);      
-    }
+    getProducts();
   }, []);
 
   return (
