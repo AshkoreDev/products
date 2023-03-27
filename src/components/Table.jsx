@@ -7,7 +7,7 @@ const Table = ({ products, openModal, deleteData }) => {
 
   return (
 
-    <div className="col-12 col-lg-8 offset-0 offset-lg-2">
+    <div className="col-12 col-lg-10 offset-0 offset-lg-1">
       <div className="table-responsive">
         <table className="table table-bordered">
           

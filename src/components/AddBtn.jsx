@@ -6,10 +6,10 @@ const AddBtn = ({ openModal }) => {
 
   return (
 
-    <div className="col-4 cold-md-4 offset-md-4">
+    <div className="col-sm-4 col-md-2 offset-md-1">
       <div className="d-grid mx-auto">
 
-        <button className="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalProducts" onClick={handleCreate}>
+        <button className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProducts" onClick={handleCreate}>
           <i>+</i> <span>Añadir</span>
         </button>
 
