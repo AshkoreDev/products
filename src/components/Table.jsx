@@ -1,7 +1,7 @@
 import React from 'react';
 import TableRow from './TableRow.jsx';
 
-const TITLES = ['#', 'PRODUCTO', 'DESCRIPCIÓN', 'PRECIO', '']
+const TITLES = ['#', 'PRODUCTO', 'DESCRIPCIÓN', 'PRECIO', '', '']
 
 const Table = ({ products, openModal, deleteData }) => {
 
@@ -11,7 +11,7 @@ const Table = ({ products, openModal, deleteData }) => {
       <div className="table-responsive">
         <table className="table table-bordered">
           
-          <thead>
+          <thead className="table-dark">
             <tr className="text-center">
               { TITLES.map((item) => <th key={item} className="fw-bold">{item}</th>) }
             </tr>

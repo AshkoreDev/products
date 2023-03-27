@@ -14,10 +14,10 @@ const TableRow = ({ product, openModal, deleteData }) => {
       <td>{description}</td>
       <td>${new Intl.NumberFormat('es-mx').format(price)}</td>
       <td>
-        <button className="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalProducts" onClick={handleEdit}>Mod /</button>
+        <button className="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalProducts" onClick={handleEdit}>Editar</button>
       </td>
       <td>
-        <button className="btn btn-danger" onClick={handleDelete}>Del -</button>
+        <button className="btn btn-danger" onClick={handleDelete}>Eliminar</button>
       </td>
     </tr>
 
