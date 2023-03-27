@@ -1,6 +1,15 @@
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
+
+function onFocus(item) {
+
+  if(item !== '') {
+
+    document.getElementById(item).focus();
+  }
+};
+
 export function showAlert(message, icon, item = '') {
 
   onFocus(item);
@@ -12,10 +21,24 @@ export function showAlert(message, icon, item = '') {
   });
 };
 
-function onFocus(item) {
 
-  if(item !== '') {
+export function confirmAlert(name) {
 
-    document.getElementById(item).focus();
-  }
-};
+  const swalAlert = withReactContent(Swal);
+
+  const alert = swalAlert.fire({
+
+    title: `¿Está seguro de eliminar el producto ${name}?`,
+    icon: 'question',
+    text: 'No se podrá dar marcha atrás',
+    showCancelButton: true,
+    confirmButtonText: 'Si, eliminar',
+    cancelButtonText: 'Cancelar'
+
+  }).then((result) => {
+
+    return result.isConfirmed;
+  });
+
+  return alert;
+}

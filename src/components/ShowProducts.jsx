@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
-// import { showAlert } from './../utils/functions.js';
 import AddBtn from './AddBtn.jsx';
 import Table from './Table.jsx';
 import Modal from './Modal.jsx';
-import { showAlert } from '../utils/functions.js';
+import { showAlert, confirmAlert } from '../utils/functions.js';
 
 const ShowProducts = () => {
 
@@ -70,15 +67,15 @@ const ShowProducts = () => {
 
       (operation === 1) ? method = 'POST' :  method = 'PATCH';
 
-      SendData(method, params, id);
+      SendData(id, method, params);
     }
   };
 
-  const SendData = async (method, params, id) => {
+  const SendData = async (id, method, params = {}) => {
 
     let URL;
 
-    (method === 'PATCH') ? URL = URL_API+id : URL = URL_API;
+    (method === 'PATCH' || 'DELETE') ? URL = URL_API + id : URL = URL_API;
 
     const resp = await fetch(URL, { 
       method: method, 
@@ -90,7 +87,7 @@ const ShowProducts = () => {
       
         let type = data.success;
         let message = data.message;
-       
+      
         showAlert(message, type);
       
         if(type === 'success') {
@@ -101,9 +98,23 @@ const ShowProducts = () => {
       .catch((error) => {
       
         showAlert('ERROR EN LA SOLICITUD', 'error');
-        console.log(error);
       });
   }
+
+  const deleteData = async (id, name) => {
+
+    const confirm = await confirmAlert(name);
+
+    if(confirm) {
+
+      setId(id);
+      SendData(id, 'DELETE',);
+
+    } else {
+
+      showAlert('EL PRODUCTO NO FUE ELIMINADO', 'info');
+    }
+  };
 
   const getProducts = async () => {
     
@@ -122,13 +133,13 @@ const ShowProducts = () => {
 
     <section>
 
-      <div className="container">
+      <div className="container-fluid">
         <div className="row my-4">
           <AddBtn openModal={openModal}/>
         </div>
 
         <div className="row mt-3">
-          <Table products={products} openModal={openModal}/>
+          <Table products={products} openModal={openModal} deleteData={deleteData}/>
         </div>
       </div>
 

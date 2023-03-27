@@ -1,14 +1,15 @@
 import React from 'react';
 
-const TableRow = ({ product, i, openModal }) => {
+const TableRow = ({ product, openModal, deleteData }) => {
 
   const { id, name, description, price } = product;
   const handleEdit = () => openModal(2, id, name, description, price);
+  const handleDelete = () => deleteData(id, name);
 
   return (
 
     <tr className="text-center">
-      <td>{(i + 1)}</td>
+      <td>{id}</td>
       <td>{name}</td>
       <td>{description}</td>
       <td>${new Intl.NumberFormat('es-mx').format(price)}</td>
@@ -16,7 +17,7 @@ const TableRow = ({ product, i, openModal }) => {
         <button className="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalProducts" onClick={handleEdit}>Mod /</button>
       </td>
       <td>
-        <button className="btn btn-danger">Del -</button>
+        <button className="btn btn-danger" onClick={handleDelete}>Del -</button>
       </td>
     </tr>
 
