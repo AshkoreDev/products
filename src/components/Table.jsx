@@ -1,7 +1,7 @@
 import React from 'react';
 import TableRow from './TableRow.jsx';
 
-const TITLES = ['#', 'PRODUCTO', 'DESCRIPCIÓN', 'PRECIO', '', '']
+const TITLES = ['#', 'PRODUCTO', 'DESCRIPCIÓN', 'PRECIO', '']
 
 const Table = ({ products, openModal, deleteData }) => {
 
