@@ -47,22 +47,22 @@ const ShowProducts = () => {
 
     if(name.trim() === '') {
 
-      showAlert('Escribe el nombre del producto', 'warning');
+      showAlert('ESCRIBE EL NOMBRE DEL PRODUCTO', 'warning');
 
     } else if(description.trim() === '') {
 
-      showAlert('Escribe la descripción del producto', 'warning');
+      showAlert('ESCRIBE LA DESCRIPCIÓN DEL PRODUCTO', 'warning');
 
     } else if(price.trim() === '') {
 
-      showAlert('Escribe el precio del producto', 'warning');
+      showAlert('ESCRIBE EL PRECIO DEL PRODUCTO', 'warning');
 
     } else {
 
       params = { 
         name: name.trim(),
         description: description.trim(),
-        price: price
+        price: price.trim()
       };
 
       (operation === 1) ? method = 'POST' :  method = 'PATCH';
